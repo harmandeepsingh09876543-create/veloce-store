@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<title>VELOCE — Modern Essentials</title>
+<style>
+:root{--ink:#111;--paper:#f7f6f2;--muted:#777;--line:#deddd7;--accent:#b7a58a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}
+.announcement{background:#111;color:#fff;text-align:center;padding:10px;font-size:10px;letter-spacing:2px;text-transform:uppercase}
+header{height:76px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(247,246,242,.96);position:sticky;top:0;z-index:5}
+.logo{font-family:Georgia,serif;font-size:29px;letter-spacing:5px;font-weight:bold}.logo small{display:block;font:8px Arial;letter-spacing:4px;text-align:center;margin-top:2px}
+nav{display:flex;gap:30px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+.header-actions{display:flex;gap:18px;align-items:center;font-size:11px;letter-spacing:1px}.cart-btn{border:1px solid #111;background:transparent;padding:10px 14px}
+.hero{min-height:590px;background:#252522;position:relative;display:flex;align-items:flex-end;overflow:hidden;color:white}
+.hero-photo{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.68),rgba(0,0,0,.08)),url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=2000&q=85') center 35%/cover}
+.hero-content{position:relative;padding:7vw 8vw 7vw;max-width:690px}.eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#d5c8b5}
+h1{font:clamp(48px,8vw,100px)/.94 Georgia,serif;font-weight:400;letter-spacing:-3px;margin:20px 0}
+.hero p{font-size:13px;line-height:1.8;color:#e3e0da;max-width:380px;margin-bottom:30px}
+.btn{display:inline-block;background:#f7f6f2;color:#111;padding:16px 25px;border:1px solid #f7f6f2;font-size:10px;letter-spacing:2px;text-transform:uppercase;transition:.2s}.btn:hover{background:transparent;color:#fff}
+.section{padding:82px 7vw}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:30px}.section-head h2{font:42px Georgia,serif;font-weight:400;margin:8px 0}.section-head p{color:var(--muted);font-size:12px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:25px}.filter{border:1px solid var(--line);background:transparent;padding:10px 16px;font-size:10px;letter-spacing:1px;text-transform:uppercase}.filter.active,.filter:hover{background:#111;color:white;border-color:#111}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{min-width:0}.product-image{height:350px;background:#e8e5df;position:relative;overflow:hidden}.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.product:hover img{transform:scale(1.04)}.tag{position:absolute;top:12px;left:12px;background:#f7f6f2;padding:7px 9px;font-size:9px;letter-spacing:1px}.product-info{display:flex;justify-content:space-between;gap:8px;padding:13px 0}.product-name{font-size:12px;letter-spacing:.4px}.product-type{color:var(--muted);font-size:10px;margin-top:5px}.price{font-size:12px;white-space:nowrap}.add{width:100%;border:1px solid #111;background:transparent;padding:12px;text-transform:uppercase;letter-spacing:1.5px;font-size:9px}.add:hover{background:#111;color:#fff}
+.story{display:grid;grid-template-columns:1fr 1fr;min-height:470px;background:#e9e6df}.story-img{background:url('https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1200&q=85') center/cover;min-height:400px}.story-copy{padding:8%;display:flex;flex-direction:column;justify-content:center}.story-copy h2{font:48px Georgia,serif;font-weight:400;margin:15px 0}.story-copy p{font-size:13px;line-height:1.9;color:#555;max-width:430px}.text-link{font-size:10px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid #111;padding-bottom:7px;align-self:flex-start;margin-top:18px}
+.newsletter{text-align:center;background:#ded8ce;padding:75px 20px}.newsletter h2{font:42px Georgia,serif;font-weight:400;margin:10px}.newsletter p{font-size:12px;color:#555}.newsletter form{display:flex;max-width:420px;margin:25px auto 0}.newsletter input{flex:1;min-width:0;padding:15px;border:1px solid #aaa;background:transparent}.newsletter button{background:#111;color:white;border:0;padding:0 20px;font-size:10px;letter-spacing:1px}
+footer{background:#111;color:#eee;padding:45px 7vw;display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap;font-size:10px;letter-spacing:1px}.footer-logo{font:26px Georgia,serif;letter-spacing:5px}.footer-note{color:#aaa;line-height:1.8;max-width:260px}
+.cart-panel{position:fixed;right:0;top:0;height:100%;width:min(390px,100%);background:var(--paper);z-index:10;box-shadow:-15px 0 50px #0002;padding:25px;transform:translateX(105%);transition:.3s;display:flex;flex-direction:column}.cart-panel.open{transform:translateX(0)}.cart-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px}.cart-top h3{font:27px Georgia,serif;font-weight:400}.close{border:0;background:transparent;font-size:25px}.cart-items{flex:1;overflow:auto}.cart-row{display:flex;justify-content:space-between;padding:17px 0;border-bottom:1px solid var(--line);font-size:12px}.cart-total{border-top:1px solid var(--line);padding-top:18px}.checkout{width:100%;padding:16px;background:#111;color:white;border:0;margin-top:14px;font-size:10px;letter-spacing:2px}.overlay{position:fixed;inset:0;background:#0006;z-index:9;display:none}.overlay.show{display:block}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.product-image{height:320px}nav{gap:14px}}
+@media(max-width:600px){header{height:65px;padding:0 18px}.logo{font-size:24px}nav{display:none}.header-actions{gap:10px}.hero{min-height:560px}.hero-content{padding:50px 25px}.section{padding:58px 18px}.section-head h2{font-size:34px}.grid{gap:12px}.product-image{height:230px}.product-name{font-size:11px}.story{grid-template-columns:1fr}.story-img{min-height:320px}.story-copy{padding:45px 25px}.story-copy h2{font-size:40px}.newsletter h2{font-size:34px}footer{padding:38px 22px}}
+</style>
+</head>
+<body>
+<div class="announcement">Complimentary shipping on orders over ₹2,999</div>
+<header>
+  <a class="logo" href="#">VELOCE<small>MOVE WITH STYLE</small></a>
+  <nav><a href="#shop">Shop</a><a href="#story">Our Story</a><a href="#contact">Contact</a></nav>
+  <div class="header-actions"><a href="#shop">EXPLORE</a><button class="cart-btn" onclick="toggleCart(true)">BAG (<span id="cart-count">0</span>)</button></div>
+</header>
+<main>
+<section class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-content"><div class="eyebrow">The new everyday collection</div><h1>Wear your<br>own pace.</h1><p>Considered essentials for every day. Clean silhouettes, confident details and effortless style — made to move with you.</p><a class="btn" href="#shop">Discover the collection</a></div>
+</section>
+<section class="section" id="shop">
+  <div class="section-head"><div><div class="eyebrow">Curated for you</div><h2>Shop the collection</h2></div><p>01 / EVERYDAY ICONS</p></div>
+  <div class="filters">
+    <button class="filter active" data-filter="All">All</button><button class="filter" data-filter="Men">Men</button><button class="filter" data-filter="Women">Women</button><button class="filter" data-filter="Unisex">Unisex</button>
+  </div>
+  <div class="grid" id="products"></div>
+</section>
+<section class="story" id="story"><div class="story-img"></div><div class="story-copy"><div class="eyebrow">The VELOCE point of view</div><h2>Less noise.<br>More expression.</h2><p>VELOCE is built around a simple idea: style should feel natural. We bring together versatile pieces, thoughtful details and a modern point of view for wardrobes that are entirely your own.</p><a class="text-link" href="#shop">Explore VELOCE</a></div></section>
+<section class="newsletter" id="contact"><div class="eyebrow">Stay in the loop</div><h2>A little more VELOCE.</h2><p>Sign up for collection updates and a first look at what’s next.</p><form onsubmit="event.preventDefault();alert('Thank you for joining VELOCE updates!');this.reset()"><input type="email" placeholder="Your email address" required><button type="submit">SIGN UP</button></form></section>
+</main>
+<footer><div><div class="footer-logo">VELOCE</div><p class="footer-note">Modern essentials. Made for every pace.</p></div><div>SHOP<br><br><a href="#shop">Men</a><br><br><a href="#shop">Women</a><br><br><a href="#shop">Unisex</a></div><div>CONNECT<br><br><a href="mailto:hello@veloce.example">Email us</a><br><br>Instagram<br><br>© 2026 VELOCE</div></footer>
+<div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
+<aside class="cart-panel" id="cart"><div class="cart-top"><h3>Your bag</h3><button class="close" onclick="toggleCart(false)">×</button></div><div class="cart-items" id="cart-items"><p>Your bag is currently empty.</p></div><div class="cart-total"><div style="display:flex;justify-content:space-between"><span>Subtotal</span><strong id="subtotal">₹0</strong></div><button class="checkout" onclick="alert('Demo checkout: connect a payment and order service before accepting real orders.')">PROCEED TO CHECKOUT</button><p style="font-size:10px;color:#777;line-height:1.6">Demo store. Checkout and payments are not connected yet.</p></div></aside>
+<script>
+const products=[
+ {id:1,name:"The Essential Overshirt",type:"Men",price:2499,img:"https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=700&q=80",tag:"BESTSELLER"},
+ {id:2,name:"Everyday Cotton Tee",type:"Unisex",price:999,img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80",tag:"ESSENTIAL"},
+ {id:3,name:"Relaxed Linen Shirt",type:"Women",price:2199,img:"https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=700&q=80",tag:"NEW"},
+ {id:4,name:"Minimal Form Jacket",type:"Men",price:3499,img:"https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=80",tag:"LIMITED"},
+ {id:5,name:"Soft Structure Top",type:"Women",price:1599,img:"https://images.unsplash.com/photo-1551163943-3f6a855d1153?auto=format&fit=crop&w=700&q=80",tag:"NEW"},
+ {id:6,name:"Classic Street Hoodie",type:"Unisex",price:2299,img:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80",tag:"EVERYDAY"},
+ {id:7,name:"Tailored Easy Trousers",type:"Men",price:2799,img:"https://images.unsplash.com/photo-1517438476312-10d79c077509?auto=format&fit=crop&w=700&q=80",tag:"JUST IN"},
+ {id:8,name:"Weekend Layer Shirt",type:"Women",price:1999,img:"https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80",tag:"EDITOR'S PICK"}
+];
+let cart=[];
+const money=n=>"₹"+n.toLocaleString("en-IN");
+function renderProducts(filter="All"){document.getElementById("products").innerHTML=products.filter(p=>filter==="All"||p.type===filter).map(p=>`<article class="product"><div class="product-image"><img src="${p.img}" alt="${p.name}" loading="lazy"><span class="tag">${p.tag}</span></div><div class="product-info"><div><div class="product-name">${p.name}</div><div class="product-type">${p.type} / VELOCE</div></div><div class="price">${money(p.price)}</div></div><button class="add" onclick="addToCart(${p.id})">Add to bag +</button></article>`).join("")}
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderProducts(b.dataset.filter)}));
+function addToCart(id){const p=products.find(x=>x.id===id);const found=cart.find(x=>x.id===id);if(found)found.qty++;else cart.push({...p,qty:1});updateCart();toggleCart(true)}
+function updateCart(){document.getElementById("cart-count").textContent=cart.reduce((s,p)=>s+p.qty,0);document.getElementById("cart-items").innerHTML=cart.length?cart.map(p=>`<div class="cart-row"><div><strong>${p.name}</strong><br><span style="color:#777">${money(p.price)} × ${p.qty}</span></div><div><button onclick="changeQty(${p.id},-1)">−</button> ${p.qty} <button onclick="changeQty(${p.id},1)">+</button></div></div>`).join(""):"<p>Your bag is currently empty.</p>";document.getElementById("subtotal").textContent=money(cart.reduce((s,p)=>s+p.price*p.qty,0))}
+function changeQty(id,n){const p=cart.find(x=>x.id===id);p.qty+=n;if(p.qty<=0)cart=cart.filter(x=>x.id!==id);updateCart()}
+function toggleCart(open){document.getElementById("cart").classList.toggle("open",open);document.getElementById("overlay").classList.toggle("show",open)}
+renderProducts();
+</script>
+</body>
+</html>
